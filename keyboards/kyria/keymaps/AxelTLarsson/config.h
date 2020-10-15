@@ -37,3 +37,9 @@
 // Flash with `make kyria:AxelTLarsson:dfu-split-right/left` from root folder, for each
 // half respectively
 #define EE_HANDS
+
+// Stuff
+#define PREVENT_STUCK_MODIFIERS
+#define IGNORE_MOD_TAP_INTERRUPT
+#define PERMISSIVE_HOLD
+#define TAPPING_TERM 250
