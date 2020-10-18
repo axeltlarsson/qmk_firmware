@@ -18,10 +18,18 @@
 // Layers
 enum layers {
     _QWERTY = 0,
-    _LOWER,
-    _RAISE,
+    _SYM,
+    _SYS,
     _ADJUST
 };
+
+// all modifiers should be modtap!
+#define KC_MYCTL MT(MOD_RCTL, KC_ENT)
+#define KC_MYSYM LT(_SYM, KC_TAB)
+#define KC_MYALT MT(MOD_RALT, KC_TAB)
+#define KC_MYGUI MT(MOD_LGUI, KC_F3)
+#define KC_MYSFT MT(MOD_LSFT, KC_BSPC)
+#define KC_MYTAB LT(_SYS, KC_ESC)
 
 // Fillers to make layering more clear
 #define _______ KC_TRNS
@@ -69,49 +77,58 @@ enum layers {
 #define KC_SE_MINS KC_SLSH
 #define KC_SE_UNDS S(KC_SLSH)
 
+enum custom_keycodes {
+  SYM = SAFE_RANGE,
+  SYS,
+  ANSIKEY,
+  ANSICOM,
+  ANSIDOT,
+  MY_SCREENSHOT,
+  M_ARROW,
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
  * Base Layer: QWERTY
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * | ESC    |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |   Å    |
+ * | SYS    |   Q  |   W  |  E   |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |   Å    |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * | Shift  |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  |   Ö  |   Ä    |
+ * | Esc    |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  |   Ö  |   Ä    |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | Ctrl   |   Z  |   X  |   C  |   V  |   B  |LShift|LShift|  |LShift|LShift|   N  |   M  | ,  < | . >  | /  ? | Shift  |
+ * | Shift  |   Z  |   X  |   C  |   V  |   B  |LShift|LShift|  |LShift|LShift|   N  |   M  | ,  < | . >  | /  ? |  SYS   |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        | CND  | Del  | Enter| Space| Esc  |  | Bspc | Space|      | Tab  | AltGr|
- *                        |      |      | Alt  | Lower| Raise|  |      |      | Raise|      |      |
+ *                        |      | Shift| CMD  | Tab  | Bspc |  | Enter| Space| Alt  | Shift|      |
+ *                        |      |      | (F3) | SYM  | Shift|  | Ctrl |      | (Tab)|      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT(
-      KC_ESC,  KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                             KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,   KC_ARING,
-      KC_LSFT, KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                              KC_H,    KC_J,    KC_K,    KC_L,    KC_OUML, KC_AUML,
-      KC_LCTL, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_LSFT,   KC_LSFT,      KC_LSFT, KC_LSFT, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_LSFT,
-              KC_LGUI, KC_DEL, MT(MOD_LALT, KC_ENT), LT(_LOWER, KC_SPC), LT(_RAISE, KC_ESC),    KC_BSPC, KC_SPC, MO(_RAISE),  KC_TAB, KC_RALT
+      KC_MYTAB,  KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                            KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_ARING,
+      KC_ESC, KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                               KC_H,    KC_J,    KC_K,    KC_L,    KC_OUML, KC_AUML,
+      KC_LSFT, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_LSFT,   KC_LSFT,      KC_LSFT, KC_LSFT, KC_N,    KC_M,    ANSICOM, ANSIDOT, ANSIKEY, KC_MYTAB,
+              _______, KC_LSFT, KC_MYGUI, KC_MYSYM, KC_MYSFT,    KC_MYCTL, KC_SPC, KC_MYALT,  KC_LSFT, _______
     ),
 /*
- * Lower Layer: Symbols
- *
+ * Symbol layer
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |  !   |  @   |  {   |  }   |  |   |                              |      |      |      |      |      |  | \   |
+ * |   `    |  !   |  @   |  {   |  }   |  &   |                              |  *   |  7   |  8   |  9   |  +   |  =     |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |  #   |  $   |  (   |  )   |  `   |                              |   +  |  -   |  /   |  *   |  %   |  ' "   |
+ * |   ~    |  ^   |  $   |  (   |  )   |  '   |                              |  ;   |  4   |  5   |  6   |  -   |  _     |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |  %   |  ^   |  [   |  ]   |  ~   |      |      |  |      |      |   &  |  =   |  ,   |  .   |  / ? | - _    |
+ * |   |    |  #   |  %   |  [   |  ]   |  "   |      |      |  |      |      |  :   |  1   |  2   |  3   |  \   |  =>    |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |      |      |      |  ;   |  =   |  |  =   |  ;   |      |      |      |
+ *                        |      |      |      |      |      |  |      |      | Enter|  0   |  0   |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
-    [_LOWER] = LAYOUT(
-      _______, KC_EXLM, KC_AT,   KC_LCBR, KC_RCBR, KC_PIPE,                                     _______, _______, _______, _______, _______, KC_BSLS,
-      _______, KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN, KC_GRV,                                      KC_PLUS, KC_MINS, KC_SLSH, KC_ASTR, KC_PERC, KC_QUOT,
-      _______, KC_PERC, KC_CIRC, KC_LBRC, KC_RBRC, KC_TILD, _______, _______, _______, _______, KC_AMPR, KC_EQL,  KC_COMM, KC_DOT,  KC_SLSH, KC_MINS,
-                                 _______, _______, _______, KC_SCLN, KC_EQL,  KC_EQL,  KC_SCLN, _______, _______, _______
+    [_SYM] = LAYOUT(
+      KC_SE_GRAV, KC_EXLM,  KC_SE_AT, KC_SE_LCBR, KC_SE_RCBR, KC_SE_AMPR,                                   KC_SE_ASTR, KC_7, KC_8, KC_9, KC_SE_PLUS,  KC_SE_EQL,
+      KC_SE_TILD, KC_SE_CIRC, KC_SE_DLR, KC_SE_LPRN, KC_SE_RPRN, KC_SE_QUOT,                                KC_SE_SCLN, KC_4, KC_5, KC_6, KC_SE_MINS, KC_SE_UNDS,
+      KC_SE_PIPE, KC_HASH, KC_PERC, KC_SE_LBRC, KC_SE_RBRC, KC_SE_DQUO, _______, _______, _______, _______, KC_SE_COLN, KC_1, KC_2, KC_3, KC_SE_BSLS,    M_ARROW,
+                                 _______, _______, _______, _______, _______, _______, _______, KC_ENT, KC_0, KC_0
     ),
 /*
- * Raise Layer: Number keys, media, navigation
+ * System Layer: Number keys, media, navigation
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * |        |   1  |  2   |  3   |  4   |  5   |                              |  6   |  7   |  8   |  9   |  0   |        |
@@ -124,7 +141,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
-    [_RAISE] = LAYOUT(
+    [_SYS] = LAYOUT(
       _______, KC_1, 	  KC_2,    KC_3,    KC_4,    KC_5,                                        KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
       _______, _______, KC_MPRV, KC_MPLY, KC_MNXT, KC_VOLU,                                     KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______,
       _______, _______, _______, _______, KC_MUTE, KC_VOLD, _______, _______, _______, _______, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, _______, _______,
@@ -172,8 +189,90 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //     ),
 };
 
+
+// Runs every time that the layers get changed. This can be useful for layer indication, or custom layer handling.
 layer_state_t layer_state_set_user(layer_state_t state) {
-    return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
+    return update_tri_layer_state(state, _SYM, _SYS, _ADJUST);
+}
+
+// Handle ANSI keys - from johannes-jansson
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  uint8_t shift_pressed = get_mods() & ((MOD_BIT(KC_LSFT) | MOD_BIT(KC_RSFT)));
+  // uint8_t alt_pressed = get_mods() & ((MOD_BIT(KC_LALT) | MOD_BIT(KC_RALT)));
+
+  switch (keycode) {
+    case ANSIKEY: {
+      if (record->event.pressed)
+        if(shift_pressed) {
+          register_code(KC_MINS);
+        } else {
+          register_code(KC_LSHIFT);
+          register_code(KC_7);
+          unregister_code(KC_LSHIFT);
+        }
+      else
+        if(shift_pressed) {
+          unregister_code(KC_MINS);
+        } else {
+          unregister_code(KC_7);
+        }
+      return false;
+    }
+    case ANSICOM: {
+      if (record->event.pressed)
+        if(shift_pressed) {
+          unregister_code(KC_LSHIFT);
+          register_code(KC_GRV);
+          register_code(KC_LSHIFT);
+        } else {
+          register_code(KC_COMM);
+        }
+      else
+        if(shift_pressed) {
+          unregister_code(KC_GRV);
+        } else {
+          unregister_code(KC_COMM);
+        }
+      return false;
+    }
+    case ANSIDOT: {
+      if (record->event.pressed)
+        if(shift_pressed) {
+          register_code(KC_GRV);
+        } else {
+          register_code(KC_DOT);
+        }
+      else
+        if(shift_pressed) {
+          unregister_code(KC_GRV);
+        } else {
+          unregister_code(KC_DOT);
+        }
+      return false;
+    }
+    case MY_SCREENSHOT:
+      if (record->event.pressed) {
+        SEND_STRING(SS_LCTRL(SS_LGUI(SS_LSFT(SS_TAP(X_4)))));
+      }
+      return false;
+      break;
+    case M_ARROW:
+      if (record->event.pressed) {
+        SEND_STRING(")" SS_LSFT("`")); // =>
+      }
+      return false;
+      break;
+    // The following handle layer switching
+    case SYM:
+      if (record->event.pressed) {
+        layer_on(_SYM);
+      } else {
+        layer_off(_SYM);
+      }
+      return false;
+      break;
+  }
+  return true;
 }
 
 #ifdef OLED_DRIVER_ENABLE
@@ -215,11 +314,11 @@ static void render_status(void) {
         case _QWERTY:
             oled_write_P(PSTR("Default\n"), false);
             break;
-        case _LOWER:
-            oled_write_P(PSTR("Lower\n"), false);
+        case _SYM:
+            oled_write_P(PSTR("Symbols\n"), false);
             break;
-        case _RAISE:
-            oled_write_P(PSTR("Raise\n"), false);
+        case _SYS:
+            oled_write_P(PSTR("System\n"), false);
             break;
         case _ADJUST:
             oled_write_P(PSTR("Adjust\n"), false);
