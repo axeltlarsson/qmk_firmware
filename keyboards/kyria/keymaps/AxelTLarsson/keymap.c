@@ -96,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * | Esc    |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  |   Ö  |   Ä    |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | Shift  |   Z  |   X  |   C  |   V  |   B  |LShift|LShift|  |LShift|LShift|   N  |   M  | ,  < | . >  | /  ? |  SYS   |
+ * | Shift  |   Z  |   X  |   C  |   V  |   B  |LShift|LShift|  | SYS  |LShift|   N  |   M  | ,  < | . >  | /  ? | Shift  |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      | Shift| CMD  | Tab  | Bspc |  | Enter| Space| Alt  | Shift|      |
  *                        |      |      | (F3) | SYM  | Shift|  | Ctrl |      | (Tab)|      |      |
@@ -105,7 +105,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT(
       KC_MYTAB,  KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                            KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_ARING,
       KC_ESC, KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                               KC_H,    KC_J,    KC_K,    KC_L,    KC_OUML, KC_AUML,
-      KC_LSFT, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_LSFT,   KC_LSFT,      KC_LSFT, KC_LSFT, KC_N,    KC_M,    ANSICOM, ANSIDOT, ANSIKEY, KC_MYTAB,
+      KC_LSFT, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_LSFT,   KC_LSFT,      KC_MYTAB, KC_LSFT, KC_N,    KC_M,    ANSICOM, ANSIDOT, ANSIKEY, KC_LSFT,
               _______, KC_LSFT, KC_MYGUI, KC_MYSYM, KC_MYSFT,    KC_MYCTL, KC_SPC, KC_MYALT,  KC_LSFT, _______
     ),
 /*
@@ -115,7 +115,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |   ~    |  ^   |  $   |  (   |  )   |  '   |                              |  ;   |  4   |  5   |  6   |  -   |  _     |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |   |    |  #   |  %   |  [   |  ]   |  "   |      |      |  |      |      |  :   |  1   |  2   |  3   |  \   |  =>    |
+ * |   |    |  #   |  %   |  [   |  ]   |  "   |      |      |  |      |      |  :   |  1   |  2   |  3   |  \   |  ->    |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |      |      |  |      |      | Enter|  0   |  0   |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
@@ -258,7 +258,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case M_ARROW:
       if (record->event.pressed) {
-        SEND_STRING(")" SS_LSFT("`")); // =>
+        SEND_STRING("/" SS_LSFT("`")); // ->
       }
       return false;
       break;
