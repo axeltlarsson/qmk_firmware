@@ -117,7 +117,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |   |    |  #   |  %   |  [   |  ]   |  "   |      |      |  |      |      |  :   |  1   |  2   |  3   |  \   |  ->    |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |      |      |      |      |      |  |      |      | Enter|  0   |  0   |
+ *                        |      |      |      |      |      |  |      |      | 0    |  0   |  0   |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
@@ -125,7 +125,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_SE_GRAV, KC_EXLM,  KC_SE_AT, KC_SE_LCBR, KC_SE_RCBR, KC_SE_AMPR,                                   KC_SE_ASTR, KC_7, KC_8, KC_9, KC_SE_PLUS,  KC_SE_EQL,
       KC_SE_TILD, KC_SE_CIRC, KC_SE_DLR, KC_SE_LPRN, KC_SE_RPRN, KC_SE_QUOT,                                KC_SE_SCLN, KC_4, KC_5, KC_6, KC_SE_MINS, KC_SE_UNDS,
       KC_SE_PIPE, KC_HASH, KC_PERC, KC_SE_LBRC, KC_SE_RBRC, KC_SE_DQUO, _______, _______, _______, _______, KC_SE_COLN, KC_1, KC_2, KC_3, KC_SE_BSLS,    M_ARROW,
-                                 _______, _______, _______, _______, _______, _______, _______, KC_ENT, KC_0, KC_0
+                                 _______, _______, _______, _______, _______, _______, _______,             KC_0,       KC_0, KC_0
     ),
 /*
  * System Layer: Number keys, media, navigation
