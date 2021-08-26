@@ -103,10 +103,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT(
-      KC_MYTAB,  KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                            KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_ARING,
-      KC_ESC, KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                               KC_H,    KC_J,    KC_K,    KC_L,    KC_OUML, KC_AUML,
-      KC_LSFT, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_LSFT,   KC_LSFT,      KC_MYTAB, KC_LSFT, KC_N,    KC_M,    ANSICOM, ANSIDOT, ANSIKEY, KC_LSFT,
-              _______, KC_LCTL, KC_MYGUI, KC_MYSYM, KC_MYSFT,    KC_MYCTL, KC_SPC, KC_MYALT,  KC_LCTL, _______
+      KC_MYTAB, KC_Q,  KC_W,   KC_E,    KC_R,    KC_T,                                            KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_ARING,
+      KC_ESC,   KC_A,  KC_S,   KC_D,    KC_F,    KC_G,                                            KC_H,    KC_J,    KC_K,    KC_L,    KC_OUML, KC_AUML,
+      KC_LSFT,  KC_Z,  KC_X,   KC_C,    KC_V,    KC_B, KC_LSFT, KC_LSFT,       KC_MYTAB, KC_LSFT, KC_N,    KC_M,    ANSICOM, ANSIDOT, ANSIKEY, KC_LSFT,
+                            _______, KC_LCTL,KC_MYGUI,KC_MYSYM,KC_MYSFT,       KC_MYCTL, KC_SPC,  KC_MYALT, KC_LCTL, _______
     ),
 /*
  * Symbol layer
@@ -117,14 +117,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |   |    |  #   |  %   |  [   |  ]   |  "   |      |      |  |      |      |  :   |  1   |  2   |  3   |  \   |  ->    |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |      |      |      |      |      |  |      |      | 0    |  0   |  0   |
+ *                        |      |      |      |      |      |  |      |      |  0   |  0   |  0   |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_SYM] = LAYOUT(
-      KC_SE_GRAV, KC_EXLM,  KC_SE_AT, KC_SE_LCBR, KC_SE_RCBR, KC_SE_AMPR,                                   KC_SE_ASTR, KC_7, KC_8, KC_9, KC_SE_PLUS,  KC_SE_EQL,
+      KC_SE_GRAV, KC_EXLM,  KC_SE_AT, KC_SE_LCBR, KC_SE_RCBR, KC_SE_AMPR,                                   KC_SE_ASTR, KC_7, KC_8, KC_9, KC_SE_PLUS, KC_SE_EQL,
       KC_SE_TILD, KC_SE_CIRC, KC_SE_DLR, KC_SE_LPRN, KC_SE_RPRN, KC_SE_QUOT,                                KC_SE_SCLN, KC_4, KC_5, KC_6, KC_SE_MINS, KC_SE_UNDS,
-      KC_SE_PIPE, KC_HASH, KC_PERC, KC_SE_LBRC, KC_SE_RBRC, KC_SE_DQUO, _______, _______, _______, _______, KC_SE_COLN, KC_1, KC_2, KC_3, KC_SE_BSLS,    M_ARROW,
+      KC_SE_PIPE, KC_HASH, KC_PERC, KC_SE_LBRC, KC_SE_RBRC, KC_SE_DQUO, _______, _______, _______, _______, KC_SE_COLN, KC_1, KC_2, KC_3, KC_SE_BSLS, M_ARROW,
                                  _______, _______, _______, _______, _______, _______, _______,             KC_0,       KC_0, KC_0
     ),
 /*
