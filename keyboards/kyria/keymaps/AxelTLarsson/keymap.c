@@ -267,7 +267,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case M_ARROW:
       if (record->event.pressed) {
-        SEND_STRING("/" SS_LSFT("`")); // ->
+        SEND_STRING("→"); // →
       }
       return false;
       break;
