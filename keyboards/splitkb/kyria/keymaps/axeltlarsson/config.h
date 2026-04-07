@@ -16,30 +16,20 @@
 
 #pragma once
 
-#ifdef OLED_DRIVER_ENABLE
-  #define OLED_DISPLAY_128X64
-#endif
-
-#ifdef RGBLIGHT_ENABLE
-  #define RGBLIGHT_ANIMATIONS
-  #define RGBLIGHT_HUE_STEP 8
-  #define RGBLIGHT_SAT_STEP 8
-  #define RGBLIGHT_VAL_STEP 8
-#endif
-
-// If you are using an Elite C rev3 on the slave side, uncomment the lines below:
+// Elite-C rev4: use USB detection to determine master/slave
 #define SPLIT_USB_DETECT
-#define NO_USB_STARTUP_CHECK
+// Auto-reboot slave if split communication drops (e.g. USB hub power cycles)
+#define SPLIT_WATCHDOG_ENABLE
 
-// I didn't put any resistors - so am not using I2C
-#define USE_SERIAL
-
-// Flash with `make kyria:AxelTLarsson:dfu-split-right/left` from root folder, for each
+// Flash with `make splitkb/kyria/rev1:axeltlarsson:dfu-split-right/left` from root folder, for each
 // half respectively
 #define EE_HANDS
 
-// Stuff
-#define PREVENT_STUCK_MODIFIERS
-#define IGNORE_MOD_TAP_INTERRUPT
+// Fix USB re-enumeration with Apple Studio Display:
+// - 2s delay after wakeup gives the display's USB hub time to stabilise
+// - Request only 100mA so the hub doesn't stall negotiating 500mA during hot-plug
+#define USB_SUSPEND_WAKEUP_DELAY 2000
+#define USB_MAX_POWER_CONSUMPTION 100
+
 #define PERMISSIVE_HOLD
 #define TAPPING_TERM 250
