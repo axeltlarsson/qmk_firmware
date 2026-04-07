@@ -16,15 +16,18 @@
 
 #pragma once
 
-// If you are using an Elite C rev3 on the slave side, uncomment the lines below:
+// Elite-C rev4: use USB detection to determine master/slave
 #define SPLIT_USB_DETECT
+// Auto-reboot slave if split communication drops (e.g. USB hub power cycles)
 #define SPLIT_WATCHDOG_ENABLE
 
 // Flash with `make splitkb/kyria/rev1:axeltlarsson:dfu-split-right/left` from root folder, for each
 // half respectively
 #define EE_HANDS
 
-// Fix USB enumeration timing with Apple Studio Display
+// Fix USB re-enumeration with Apple Studio Display:
+// - 2s delay after wakeup gives the display's USB hub time to stabilise
+// - Request only 100mA so the hub doesn't stall negotiating 500mA during hot-plug
 #define USB_SUSPEND_WAKEUP_DELAY 2000
 #define USB_MAX_POWER_CONSUMPTION 100
 
