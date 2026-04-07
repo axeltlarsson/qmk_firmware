@@ -18,14 +18,15 @@
 
 // If you are using an Elite C rev3 on the slave side, uncomment the lines below:
 #define SPLIT_USB_DETECT
-#define NO_USB_STARTUP_CHECK
+#define SPLIT_WATCHDOG_ENABLE
 
 // Flash with `make splitkb/kyria/rev1:axeltlarsson:dfu-split-right/left` from root folder, for each
 // half respectively
 #define EE_HANDS
 
 // Fix USB enumeration timing with Apple Studio Display
-#define USB_SUSPEND_WAKEUP_DELAY 1000
+#define USB_SUSPEND_WAKEUP_DELAY 2000
+#define USB_MAX_POWER_CONSUMPTION 100
 
 #define PERMISSIVE_HOLD
 #define TAPPING_TERM 250
