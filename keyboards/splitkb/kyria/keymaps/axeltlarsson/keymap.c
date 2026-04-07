@@ -173,7 +173,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     return update_tri_layer_state(state, _SYM, _SYS, _ADJUST);
 }
 
-// Handle ANSI keys on Swedish layout
+// Handle ANSI keys - from johannes-jansson
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   uint8_t shift_pressed = get_mods() & ((MOD_BIT(KC_LSFT) | MOD_BIT(KC_RSFT)));
 
