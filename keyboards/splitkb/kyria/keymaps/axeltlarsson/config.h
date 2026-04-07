@@ -24,5 +24,8 @@
 // half respectively
 #define EE_HANDS
 
+// Fix USB enumeration timing with Apple Studio Display
+#define USB_SUSPEND_WAKEUP_DELAY 1000
+
 #define PERMISSIVE_HOLD
 #define TAPPING_TERM 250
